@@ -172,10 +172,10 @@
 .canvas-frame__copy {
   position: absolute;
   top: 50%;
-  left: -60px;
+  left: -5px;
   transform: translateY(-50%);
   text-transform: uppercase;
-  z-index: 3;
+  z-index: 10;
   pointer-events: none;
   color: #5b3fa1;
   width: 70px;

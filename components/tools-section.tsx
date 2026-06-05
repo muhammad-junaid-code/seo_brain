@@ -617,7 +617,7 @@ export function ToolsSection() {
         {/* Tools Grid */}
         <motion.div 
           ref={ref}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 gap-y-10 pl-4"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -681,7 +681,7 @@ export function ToolsSection() {
                       position: "relative",
                       width: "100%",
                       height: "180px",
-                      backgroundImage: `url(/images/llms-txt-generator.jpg)`,
+                      backgroundImage: `url(/images/ai-image-generator.jpg)`,
                       backgroundPosition: "center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",

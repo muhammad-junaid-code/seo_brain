@@ -100,7 +100,7 @@ export default function ToolsPage() {
           </motion.div>
 
           {/* Tools Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-16 gap-y-10 pl-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredTools.map((tool, index) => {
               return (
                 <motion.div
