@@ -166,6 +166,12 @@
   width: 90px;
   padding-left: 10px;
 }
+/* For long words - position at bottom of card */
+.canvas-frame__copy.copy-bottom {
+  top: auto;
+  bottom: 15%;
+  transform: translateY(0);
+}
 .canvas_copy_title {
   font-size: 28px;
   display: block;

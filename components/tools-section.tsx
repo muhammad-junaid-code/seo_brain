@@ -650,18 +650,18 @@ export function ToolsSection() {
                   </svg>
                 </div>
 
-                {/* Tool name slides in from left on hover — replaces "Hello World" */}
-                <div className="canvas-frame__copy" aria-hidden="true">
+                {/* Tool name slides in from left - bottom for long words, middle for short */}
+                <div className={`canvas-frame__copy ${tool.name.split(" ").some((w: string) => w.length > 6) ? "copy-bottom" : ""}`} aria-hidden="true">
                   {tool.name.split(" ").slice(0, 2).map((word: string, i: number) => (
                     <strong key={i} className="canvas_copy_title">{word}</strong>
                   ))}
                   <span className="canvas_copy_details">{tool.tier} Tool</span>
                 </div>
 
-                {/* White outer box — reduced padding by 8% */}
+                {/* White outer box — reduced padding */}
                 <div
                   style={{
-                    padding: "1.5rem",
+                    padding: "1rem",
                     background: "#ffffff",
                     borderRadius: "0.75rem",
                     boxShadow: "0 20px 60px rgba(149, 128, 196, 0.18)",
@@ -670,14 +670,14 @@ export function ToolsSection() {
                     zIndex: 2,
                   }}
                 >
-                  {/* Image card — reduced size by 8% from all sides */}
+                  {/* Image card — smaller size */}
                   <div
                     className="group/card"
                     style={{
                       position: "relative",
-                      width: "92%",
+                      width: "85%",
                       aspectRatio: "3/2",
-                      margin: "4% auto",
+                      margin: "0 auto",
                       backgroundImage: `url(/images/${tool.slug === "llms-txt-generator" ? "llm-optimizer" : tool.slug === "seo-agent-pro" ? "seo-agent-2" : tool.slug}.jpg)`,
                       backgroundPosition: "center",
                       backgroundSize: "cover",
@@ -700,17 +700,16 @@ export function ToolsSection() {
                       e.currentTarget.style.boxShadow = "0 25px 60px rgba(80, 60, 130, 0.35), 0 8px 20px rgba(80, 60, 130, 0.2)";
                     }}
                   >
-                    {/* FRONT glass panel — exact: 60% x 60%, blur(8px), margin 1rem */}
+                    {/* FRONT glass panel — smaller size */}
                     <div
                       className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] group-hover/card:[transform:rotateY(180deg)]"
                       style={{
                         position: "absolute",
-                        width: "60%",
-                        height: "60%",
+                        width: "50%",
+                        height: "50%",
                         background: "rgba(255,255,255,0.55)",
                         backdropFilter: "blur(8px)",
                         WebkitBackdropFilter: "blur(8px)",
-                        margin: "1rem",
                         borderRadius: "0.5rem",
                         border: "1px solid rgba(255,255,255,0.6)",
                         boxShadow: "0 8px 24px rgba(149,128,196,0.25)",
@@ -718,16 +717,16 @@ export function ToolsSection() {
                     >
                       <h3 style={{
                         color: "rgba(40,30,70,0.95)",
-                        padding: ".25rem 0.5rem",
+                        padding: ".2rem 0.4rem",
                         margin: 0,
                         fontWeight: 600,
-                        fontSize: "0.875rem",
+                        fontSize: "0.75rem",
                         textAlign: "center",
                         lineHeight: 1.3,
                       }}>
                         {tool.name}
                       </h3>
-                      <p style={{ color: "rgba(80,70,110,0.75)", margin: 0, fontSize: "0.7rem" }}>
+                      <p style={{ color: "rgba(80,70,110,0.75)", margin: 0, fontSize: "0.6rem" }}>
                         {tool.tier} Tool
                       </p>
                     </div>
