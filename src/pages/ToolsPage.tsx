@@ -48,10 +48,10 @@ export default function ToolsPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <Badge className="mb-4 bg-violet-100 text-violet-700 hover:bg-violet-100">
+            <span className="inline-flex items-center mb-4 px-3 py-1 rounded-full bg-violet-100 text-violet-700 text-sm font-medium">
               <Sparkles className="w-3 h-3 mr-1" />
               48 AI-Powered Tools
-            </Badge>
+            </span>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 text-balance">
               Everything you need to dominate SEO
             </h1>
