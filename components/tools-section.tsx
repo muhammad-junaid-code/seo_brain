@@ -658,10 +658,10 @@ export function ToolsSection() {
                   <span className="canvas_copy_details">{tool.tier} Tool</span>
                 </div>
 
-                {/* White outer box — reduced padding */}
+                {/* White outer box — increased height */}
                 <div
                   style={{
-                    padding: "1rem",
+                    padding: "1.5rem 1rem",
                     background: "#ffffff",
                     borderRadius: "0.75rem",
                     boxShadow: "0 20px 60px rgba(149, 128, 196, 0.18)",
