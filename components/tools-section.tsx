@@ -665,11 +665,11 @@ export function ToolsSection() {
                 <div
                   className="glass-card-container"
                   style={{
-                    padding: "1.5rem",
+                    padding: "1rem",
                     background: "#ffffff",
-                    borderRadius: "0.75rem",
-                    boxShadow: "0 20px 60px rgba(149, 128, 196, 0.18)",
-                    border: "1px solid rgba(149, 128, 196, 0.12)",
+                    borderRadius: "0.5rem",
+                    boxShadow: "0 15px 40px rgba(149, 128, 196, 0.15)",
+                    border: "1px solid rgba(149, 128, 196, 0.1)",
                     position: "relative",
                     zIndex: 2,
                   }}
@@ -680,13 +680,13 @@ export function ToolsSection() {
                     style={{
                       position: "relative",
                       width: "100%",
-                      height: "180px",
+                      height: "140px",
                       backgroundImage: `url(/images/ai-image-generator.jpg)`,
                       backgroundPosition: "center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
-                      borderRadius: "0.5rem",
-                      boxShadow: "0 25px 60px rgba(80, 60, 130, 0.35), 0 8px 20px rgba(80, 60, 130, 0.2)",
+                      borderRadius: "0.375rem",
+                      boxShadow: "0 15px 40px rgba(80, 60, 130, 0.25), 0 5px 15px rgba(80, 60, 130, 0.15)",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
@@ -709,26 +709,26 @@ export function ToolsSection() {
                       className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] group-hover/card:[transform:rotateY(180deg)]"
                       style={{
                         position: "absolute",
-                        width: "70%",
-                        minHeight: "50%",
+                        width: "65%",
+                        minHeight: "45%",
                         background: "rgba(255,255,255,0.55)",
                         backdropFilter: "blur(8px)",
                         WebkitBackdropFilter: "blur(8px)",
-                        borderRadius: "0.5rem",
+                        borderRadius: "0.375rem",
                         border: "1px solid rgba(255,255,255,0.6)",
-                        boxShadow: "0 8px 24px rgba(149,128,196,0.25)",
-                        padding: "0.75rem",
+                        boxShadow: "0 6px 18px rgba(149,128,196,0.2)",
+                        padding: "0.5rem",
                         zIndex: 2,
                       }}
                     >
-                      <h3 className="text-sm font-semibold text-center" style={{ color: "rgba(40,30,70,0.95)" }}>
+                      <h3 className="text-xs font-semibold text-center" style={{ color: "rgba(40,30,70,0.95)" }}>
                         {tool.name}
                       </h3>
                       <Badge 
                         variant="outline" 
                         className={`mt-1 ${tool.tier === "Free" 
-                          ? "bg-emerald-50/80 text-emerald-700 border-emerald-200 text-xs" 
-                          : "bg-violet-50/80 text-violet-700 border-violet-200 text-xs"
+                          ? "bg-emerald-50/80 text-emerald-700 border-emerald-200 text-[10px]" 
+                          : "bg-violet-50/80 text-violet-700 border-violet-200 text-[10px]"
                         }`}
                       >
                         {tool.tier}
@@ -740,27 +740,27 @@ export function ToolsSection() {
                       className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] [transform:rotateY(-180deg)] opacity-0 group-hover/card:[transform:rotateY(0deg)] group-hover/card:opacity-100"
                       style={{
                         position: "absolute",
-                        width: "calc(100% - 1rem)",
-                        height: "calc(100% - 1rem)",
+                        width: "calc(100% - 0.75rem)",
+                        height: "calc(100% - 0.75rem)",
                         background: "rgba(255,255,255,0.85)",
                         backdropFilter: "blur(10px)",
                         WebkitBackdropFilter: "blur(10px)",
-                        borderRadius: "0.5rem",
+                        borderRadius: "0.375rem",
                         border: "1px solid rgba(183, 163, 224, 0.4)",
-                        boxShadow: "0 10px 30px rgba(149,128,196,0.3)",
-                        padding: "0.75rem",
+                        boxShadow: "0 8px 20px rgba(149,128,196,0.25)",
+                        padding: "0.5rem",
                         zIndex: 2,
                       }}
                     >
-                      <h3 className="text-sm font-semibold mb-1" style={{ color: "#5b3fa1" }}>
+                      <h3 className="text-xs font-semibold mb-1" style={{ color: "#5b3fa1" }}>
                         {tool.name}
                       </h3>
-                      <p className="text-xs text-center line-clamp-3" style={{ color: "rgba(60,50,90,0.75)", lineHeight: 1.5 }}>
+                      <p className="text-[10px] text-center line-clamp-2" style={{ color: "rgba(60,50,90,0.75)", lineHeight: 1.4 }}>
                         {tool.description}
                       </p>
                       <Badge 
                         variant="outline" 
-                        className="mt-2 bg-slate-100/80 text-slate-600 border-slate-200 text-xs capitalize"
+                        className="mt-1 bg-slate-100/80 text-slate-600 border-slate-200 text-[10px] capitalize"
                       >
                         {tool.category}
                       </Badge>
