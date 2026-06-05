@@ -617,7 +617,7 @@ export function ToolsSection() {
         {/* Tools Grid */}
         <motion.div 
           ref={ref}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -629,31 +629,144 @@ export function ToolsSection() {
             >
               <Link
                 to={`/tools/${tool.slug}`}
-                className="group block p-5 rounded-xl bg-white border border-slate-200 hover:border-violet-300 hover:shadow-lg transition-all duration-200"
+                className="canvas-frame group block"
               >
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.2 }}
+                {/* Purple animated border line */}
+                <div className="canvas-frame__border" aria-hidden="true">
+                  <svg preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id={`grad-purple-home-${tool.slug}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#b8a4e0" />
+                        <stop offset="100%" stopColor="#5b3fa1" />
+                      </linearGradient>
+                    </defs>
+                    <rect
+                      className="rect-gradient"
+                      fill="none"
+                      stroke={`url(#grad-purple-home-${tool.slug})`}
+                      strokeLinecap="square"
+                      strokeWidth="3"
+                      strokeMiterlimit="30"
+                      width="100%"
+                      height="100%"
+                    />
+                  </svg>
+                </div>
+
+                {/* Sliding tool name text - shows on hover */}
+                <div className="canvas-frame__copy" aria-hidden="true">
+                  {tool.name.split(' ').slice(0, 2).map((word, i) => (
+                    <strong key={i} className="canvas_copy_title">{word}</strong>
+                  ))}
+                  <span className="canvas_copy_details">{tool.tier} Tool</span>
+                </div>
+
+                {/* White card container */}
+                <div
+                  className="glass-card-container"
+                  style={{
+                    padding: "1rem",
+                    background: "#ffffff",
+                    borderRadius: "0.5rem",
+                    boxShadow: "0 15px 40px rgba(149, 128, 196, 0.15)",
+                    border: "1px solid rgba(149, 128, 196, 0.1)",
+                    position: "relative",
+                    zIndex: 2,
+                  }}
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <tool.icon className="w-6 h-6 text-violet-600" />
-                    </div>
-                    <Badge 
-                      variant="outline" 
-                      className={tool.tier === "Free" 
-                        ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
-                        : "bg-violet-50 text-violet-700 border-violet-200"
-                      }
+                  {/* Image card with blur and glassmorphism overlay */}
+                  <div
+                    className="group/card glass-card"
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      height: "140px",
+                      backgroundImage: `url(/images/ai-image-generator.jpg)`,
+                      backgroundPosition: "center",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      borderRadius: "0.375rem",
+                      boxShadow: "0 15px 40px rgba(80, 60, 130, 0.25), 0 5px 15px rgba(80, 60, 130, 0.15)",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {/* Blur overlay on image */}
+                    <div 
+                      className="absolute inset-0"
+                      style={{
+                        backdropFilter: "blur(3px)",
+                        WebkitBackdropFilter: "blur(3px)",
+                        background: "rgba(255,255,255,0.15)",
+                      }}
+                    />
+                    
+                    {/* Front overlay - name and tier */}
+                    <div
+                      className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] group-hover/card:[transform:rotateY(180deg)]"
+                      style={{
+                        position: "absolute",
+                        width: "65%",
+                        minHeight: "45%",
+                        background: "rgba(255,255,255,0.55)",
+                        backdropFilter: "blur(8px)",
+                        WebkitBackdropFilter: "blur(8px)",
+                        borderRadius: "0.375rem",
+                        border: "1px solid rgba(255,255,255,0.6)",
+                        boxShadow: "0 6px 18px rgba(149,128,196,0.2)",
+                        padding: "0.5rem",
+                        zIndex: 2,
+                      }}
                     >
-                      {tool.tier}
-                    </Badge>
+                      <h3 className="text-xs font-semibold text-center" style={{ color: "rgba(40,30,70,0.95)" }}>
+                        {tool.name}
+                      </h3>
+                      <Badge 
+                        variant="outline" 
+                        className={`mt-1 ${tool.tier === "Free" 
+                          ? "bg-emerald-50/80 text-emerald-700 border-emerald-200 text-[10px]" 
+                          : "bg-violet-50/80 text-violet-700 border-violet-200 text-[10px]"
+                        }`}
+                      >
+                        {tool.tier}
+                      </Badge>
+                    </div>
+
+                    {/* Back overlay - description */}
+                    <div
+                      className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] [transform:rotateY(-180deg)] opacity-0 group-hover/card:[transform:rotateY(0deg)] group-hover/card:opacity-100"
+                      style={{
+                        position: "absolute",
+                        width: "calc(100% - 0.75rem)",
+                        height: "calc(100% - 0.75rem)",
+                        background: "rgba(255,255,255,0.85)",
+                        backdropFilter: "blur(10px)",
+                        WebkitBackdropFilter: "blur(10px)",
+                        borderRadius: "0.375rem",
+                        border: "1px solid rgba(183, 163, 224, 0.4)",
+                        boxShadow: "0 8px 20px rgba(149,128,196,0.25)",
+                        padding: "0.5rem",
+                        zIndex: 2,
+                      }}
+                    >
+                      <h3 className="text-xs font-semibold mb-1" style={{ color: "#5b3fa1" }}>
+                        {tool.name}
+                      </h3>
+                      <p className="text-[10px] text-center line-clamp-2" style={{ color: "rgba(60,50,90,0.75)", lineHeight: 1.4 }}>
+                        {tool.description}
+                      </p>
+                      <Badge 
+                        variant="outline" 
+                        className="mt-1 bg-slate-100/80 text-slate-600 border-slate-200 text-[10px] capitalize"
+                      >
+                        {tool.category}
+                      </Badge>
+                    </div>
                   </div>
-                  <h3 className="font-semibold text-slate-900 mb-1 group-hover:text-violet-600 transition-colors">
-                    {tool.name}
-                  </h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">{tool.description}</p>
-                </motion.div>
+                </div>
               </Link>
             </motion.div>
           ))}
