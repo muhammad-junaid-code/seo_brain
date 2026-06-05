@@ -100,7 +100,7 @@ export default function ToolsPage() {
           </motion.div>
 
           {/* Tools Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {filteredTools.map((tool, index) => {
               return (
                 <motion.div
@@ -143,15 +143,15 @@ export default function ToolsPage() {
                       <span className="canvas_copy_details">{tool.tier} Tool</span>
                     </div>
 
-                    {/* White card container */}
+                    {/* White card container - Compact like reference */}
                     <div
                       className="glass-card-container"
                       style={{
-                        padding: "1rem",
+                        padding: "0.75rem",
                         background: "#ffffff",
                         borderRadius: "0.5rem",
-                        boxShadow: "0 15px 40px rgba(149, 128, 196, 0.15)",
-                        border: "1px solid rgba(149, 128, 196, 0.1)",
+                        boxShadow: "0 12px 35px rgba(149, 128, 196, 0.12)",
+                        border: "1px solid rgba(149, 128, 196, 0.08)",
                         position: "relative",
                         zIndex: 2,
                       }}
@@ -162,74 +162,74 @@ export default function ToolsPage() {
                         style={{
                           position: "relative",
                           width: "100%",
-                          height: "140px",
+                          height: "120px",
                           backgroundImage: `url(/images/${tool.slug}.jpg)`,
                           backgroundPosition: "center",
                           backgroundSize: "cover",
                           backgroundRepeat: "no-repeat",
                           borderRadius: "0.375rem",
-                          boxShadow: "0 15px 40px rgba(80, 60, 130, 0.25), 0 5px 15px rgba(80, 60, 130, 0.15)",
+                          boxShadow: "0 12px 30px rgba(80, 60, 130, 0.2), 0 4px 12px rgba(80, 60, 130, 0.12)",
                           cursor: "pointer",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                         }}
                       >
-                        {/* Front overlay - name and tier */}
+                        {/* Front overlay - name and tier - Compact glassmorphism */}
                         <div
                           className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] group-hover/card:[transform:rotateY(180deg)]"
                           style={{
                             position: "absolute",
-                            width: "65%",
-                            minHeight: "45%",
-                            background: "rgba(255,255,255,0.55)",
-                            backdropFilter: "blur(8px)",
-                            WebkitBackdropFilter: "blur(8px)",
+                            width: "60%",
+                            minHeight: "40%",
+                            background: "rgba(255,255,255,0.6)",
+                            backdropFilter: "blur(10px)",
+                            WebkitBackdropFilter: "blur(10px)",
                             borderRadius: "0.375rem",
-                            border: "1px solid rgba(255,255,255,0.6)",
-                            boxShadow: "0 6px 18px rgba(149,128,196,0.2)",
-                            padding: "0.5rem",
+                            border: "1px solid rgba(255,255,255,0.7)",
+                            boxShadow: "0 4px 14px rgba(149,128,196,0.18)",
+                            padding: "0.4rem 0.5rem",
                           }}
                         >
-                          <h3 className="text-xs font-semibold text-center" style={{ color: "rgba(40,30,70,0.95)" }}>
+                          <h3 className="text-[11px] font-semibold text-center leading-tight" style={{ color: "rgba(40,30,70,0.95)" }}>
                             {tool.name}
                           </h3>
                           <Badge 
                             variant="outline" 
                             className={`mt-1 ${tool.tier === "Free" 
-                              ? "bg-emerald-50/80 text-emerald-700 border-emerald-200 text-[10px]" 
-                              : "bg-violet-50/80 text-violet-700 border-violet-200 text-[10px]"
+                              ? "bg-emerald-50/80 text-emerald-700 border-emerald-200 text-[9px] px-1.5 py-0" 
+                              : "bg-violet-50/80 text-violet-700 border-violet-200 text-[9px] px-1.5 py-0"
                             }`}
                           >
                             {tool.tier}
                           </Badge>
                         </div>
 
-                        {/* Back overlay - description */}
+                        {/* Back overlay - description - Compact */}
                         <div
                           className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] [transform:rotateY(-180deg)] opacity-0 group-hover/card:[transform:rotateY(0deg)] group-hover/card:opacity-100"
                           style={{
                             position: "absolute",
-                            width: "calc(100% - 0.75rem)",
-                            height: "calc(100% - 0.75rem)",
-                            background: "rgba(255,255,255,0.85)",
-                            backdropFilter: "blur(10px)",
-                            WebkitBackdropFilter: "blur(10px)",
+                            width: "calc(100% - 0.5rem)",
+                            height: "calc(100% - 0.5rem)",
+                            background: "rgba(255,255,255,0.88)",
+                            backdropFilter: "blur(12px)",
+                            WebkitBackdropFilter: "blur(12px)",
                             borderRadius: "0.375rem",
-                            border: "1px solid rgba(183, 163, 224, 0.4)",
-                            boxShadow: "0 8px 20px rgba(149,128,196,0.25)",
-                            padding: "0.5rem",
+                            border: "1px solid rgba(183, 163, 224, 0.35)",
+                            boxShadow: "0 6px 16px rgba(149,128,196,0.2)",
+                            padding: "0.4rem",
                           }}
                         >
-                          <h3 className="text-xs font-semibold mb-1" style={{ color: "#5b3fa1" }}>
+                          <h3 className="text-[10px] font-semibold mb-0.5" style={{ color: "#5b3fa1" }}>
                             {tool.name}
                           </h3>
-                          <p className="text-[10px] text-center line-clamp-2" style={{ color: "rgba(60,50,90,0.75)", lineHeight: 1.4 }}>
+                          <p className="text-[9px] text-center line-clamp-2" style={{ color: "rgba(60,50,90,0.75)", lineHeight: 1.35 }}>
                             {tool.description}
                           </p>
                           <Badge 
                             variant="outline" 
-                            className="mt-1 bg-slate-100/80 text-slate-600 border-slate-200 text-[10px] capitalize"
+                            className="mt-1 bg-slate-100/80 text-slate-600 border-slate-200 text-[8px] px-1.5 py-0 capitalize"
                           >
                             {tool.category}
                           </Badge>
