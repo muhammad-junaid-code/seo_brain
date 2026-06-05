@@ -626,7 +626,40 @@ export function ToolsSection() {
               key={tool.id}
               variants={cardVariants}
             >
-              <Link to={`/tools/${tool.slug}`}>
+              <Link
+                to={`/tools/${tool.slug}`}
+                className="canvas-frame group block"
+              >
+                {/* Purple animated border line */}
+                <div className="canvas-frame__border" aria-hidden="true">
+                  <svg preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id={`grad-purple-home-${tool.slug}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#b8a4e0" />
+                        <stop offset="100%" stopColor="#5b3fa1" />
+                      </linearGradient>
+                    </defs>
+                    <rect
+                      className="rect-gradient"
+                      fill="none"
+                      stroke={`url(#grad-purple-home-${tool.slug})`}
+                      strokeLinecap="square"
+                      strokeWidth="3"
+                      strokeMiterlimit="30"
+                      width="100%"
+                      height="100%"
+                    />
+                  </svg>
+                </div>
+
+                {/* Sliding tool name text - shows on hover */}
+                <div className="canvas-frame__copy" aria-hidden="true">
+                  {tool.name.split(' ').slice(0, 2).map((word, i) => (
+                    <strong key={i} className="canvas_copy_title">{word}</strong>
+                  ))}
+                  <span className="canvas_copy_details">{tool.tier} Tool</span>
+                </div>
+
                 {/* Outer white box — exact from luminous-glass-ui template */}
                 <div
                   style={{
@@ -692,7 +725,6 @@ export function ToolsSection() {
                         {tool.name}
                       </h3>
                       <p style={{ 
-                        color: "rgba(80,70,110,0.75)", 
                         margin: 0,
                         marginTop: "0.25rem",
                         fontSize: "0.7rem",
