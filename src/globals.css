@@ -157,7 +157,7 @@
 }
 .canvas-frame__copy {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: -80px;
   transform: translateY(-50%);
   text-transform: uppercase;
@@ -169,7 +169,7 @@
 /* For long words - position at bottom of card */
 .canvas-frame__copy.copy-bottom {
   top: auto;
-  bottom: 15%;
+  bottom: 10%;
   transform: translateY(0);
 }
 .canvas_copy_title {
