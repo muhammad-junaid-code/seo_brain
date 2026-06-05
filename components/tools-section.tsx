@@ -616,155 +616,138 @@ export function ToolsSection() {
         {/* Tools Grid */}
         <motion.div 
           ref={ref}
-          className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {filteredTools.map((tool) => {
-            // Special image paths
-            const getImagePath = (slug: string) => {
-              if (slug === "llms-txt-generator") return "/images/llm-optimizer.jpg"
-              if (slug === "seo-agent-pro") return "/images/seo-agent-2.jpg"
-              return `/images/${slug}.jpg`
-            }
-            
-            return (
-              <motion.div
-                key={tool.id}
-                variants={cardVariants}
-              >
-                <Link to={`/tools/${tool.slug}`}>
-                  {/* Outer white box */}
-                  <div style={{
-                    padding: "1.5rem",
+          {filteredTools.map((tool) => (
+            <motion.div
+              key={tool.id}
+              variants={cardVariants}
+            >
+              <Link to={`/tools/${tool.slug}`}>
+                {/* Outer white box — exact from luminous-glass-ui template */}
+                <div
+                  style={{
+                    padding: "2rem",
                     background: "#ffffff",
                     borderRadius: "0.75rem",
                     boxShadow: "0 20px 60px rgba(149, 128, 196, 0.18)",
                     border: "1px solid rgba(149, 128, 196, 0.12)",
-                    width: "100%",
-                  }}>
-
-                    {/* Card — width:100%, aspectRatio:3/2 so it scales perfectly at ANY size */}
+                    position: "relative",
+                    zIndex: 2,
+                  }}
+                >
+                  {/* Card — fixed 300x200 ratio (3:2), no background image on homepage */}
+                  <div
+                    className="group/card"
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      aspectRatio: "3/2",
+                      background: "linear-gradient(135deg, #f6f4fb 0%, #ebe7f5 100%)",
+                      borderRadius: "0.5rem",
+                      boxShadow: "0 25px 60px rgba(80, 60, 130, 0.35), 0 8px 20px rgba(80, 60, 130, 0.2)",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "transform 0.4s ease, box-shadow 0.4s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-6px)";
+                      e.currentTarget.style.boxShadow = "0 35px 70px rgba(80, 60, 130, 0.45), 0 12px 30px rgba(80, 60, 130, 0.25)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "0 25px 60px rgba(80, 60, 130, 0.35), 0 8px 20px rgba(80, 60, 130, 0.2)";
+                    }}
+                  >
+                    {/* FRONT glass panel — 60% x 60% with margin 1rem */}
                     <div
-                      className="group/card"
+                      className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] group-hover/card:[transform:rotateY(180deg)]"
                       style={{
-                        position: "relative",
-                        width: "100%",
-                        aspectRatio: "3/2",
-                        backgroundImage: `url(${getImagePath(tool.slug)})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
+                        position: "absolute",
+                        width: "60%",
+                        height: "60%",
+                        background: "rgba(255,255,255,0.55)",
+                        backdropFilter: "blur(8px)",
+                        WebkitBackdropFilter: "blur(8px)",
+                        margin: "1rem",
                         borderRadius: "0.5rem",
-                        boxShadow: "0 25px 60px rgba(80, 60, 130, 0.35), 0 8px 20px rgba(80, 60, 130, 0.2)",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        transition: "transform 0.4s ease, box-shadow 0.4s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = "translateY(-6px)";
-                        e.currentTarget.style.boxShadow = "0 35px 70px rgba(80, 60, 130, 0.45), 0 12px 30px rgba(80, 60, 130, 0.25)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = "translateY(0)";
-                        e.currentTarget.style.boxShadow = "0 25px 60px rgba(80, 60, 130, 0.35), 0 8px 20px rgba(80, 60, 130, 0.2)";
+                        border: "1px solid rgba(255,255,255,0.6)",
+                        boxShadow: "0 8px 24px rgba(149,128,196,0.25)",
                       }}
                     >
+                      <h3 style={{ 
+                        color: "rgba(40,30,70,0.95)", 
+                        padding: ".25rem 0.5rem", 
+                        margin: 0, 
+                        fontWeight: 600,
+                        textAlign: "center",
+                        fontSize: "0.875rem",
+                        lineHeight: 1.3,
+                      }}>
+                        {tool.name}
+                      </h3>
+                      <p style={{ 
+                        color: "rgba(80,70,110,0.75)", 
+                        margin: 0,
+                        marginTop: "0.25rem",
+                        fontSize: "0.7rem",
+                        padding: "2px 10px",
+                        borderRadius: "999px",
+                        background: tool.tier === "Free" ? "rgba(16,185,129,0.15)" : "rgba(91,63,161,0.15)",
+                        color: tool.tier === "Free" ? "#059669" : "#5b3fa1",
+                        border: tool.tier === "Free" ? "1px solid rgba(16,185,129,0.3)" : "1px solid rgba(91,63,161,0.3)",
+                        fontWeight: 500,
+                      }}>
+                        {tool.tier}
+                      </p>
+                    </div>
 
-                      {/* FRONT glass panel — always 60% x 60% of card, margin 1rem */}
-                      <div
-                        className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] group-hover/card:[transform:rotateY(180deg)]"
-                        style={{
-                          position: "absolute",
-                          width: "60%",
-                          height: "60%",
-                          background: "rgba(255,255,255,0.55)",
-                          backdropFilter: "blur(8px)",
-                          WebkitBackdropFilter: "blur(8px)",
-                          margin: "1rem",
-                          borderRadius: "0.5rem",
-                          border: "1px solid rgba(255,255,255,0.6)",
-                          boxShadow: "0 8px 24px rgba(149,128,196,0.25)",
-                        }}
-                      >
-                        <h3 style={{
-                          color: "rgba(40,30,70,0.95)",
+                    {/* BACK glass panel — calc(100% - 2rem) */}
+                    <div
+                      className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] [transform:rotateY(-180deg)] opacity-0 group-hover/card:[transform:rotateY(0deg)] group-hover/card:opacity-100"
+                      style={{
+                        position: "absolute",
+                        width: "calc(100% - 2rem)",
+                        height: "calc(100% - 2rem)",
+                        background: "rgba(255,255,255,0.85)",
+                        backdropFilter: "blur(10px)",
+                        WebkitBackdropFilter: "blur(10px)",
+                        borderRadius: "0.5rem",
+                        border: "1px solid rgba(183, 163, 224, 0.4)",
+                        boxShadow: "0 10px 30px rgba(149,128,196,0.3)",
+                      }}
+                    >
+                      {/* Inner content 80% x 80% with justify-evenly */}
+                      <div className="flex flex-col justify-evenly" style={{ height: "80%", width: "80%" }}>
+                        <h3 style={{ 
+                          color: "#5b3fa1", 
+                          padding: "0.5rem 0", 
+                          margin: 0, 
                           fontWeight: 600,
-                          margin: 0,
-                          textAlign: "center",
-                          padding: "0 0.5rem",
-                          fontSize: "0.9rem",
-                          lineHeight: 1.3,
+                          fontSize: "0.875rem",
                         }}>
                           {tool.name}
                         </h3>
-                        <span style={{
-                          marginTop: "0.375rem",
-                          fontSize: "0.7rem",
-                          padding: "2px 10px",
-                          borderRadius: "999px",
-                          background: tool.tier === "Free" ? "rgba(16,185,129,0.15)" : "rgba(91,63,161,0.15)",
-                          color: tool.tier === "Free" ? "#059669" : "#5b3fa1",
-                          border: tool.tier === "Free" ? "1px solid rgba(16,185,129,0.3)" : "1px solid rgba(91,63,161,0.3)",
-                          fontWeight: 500,
+                        <p style={{ 
+                          fontSize: "0.75rem", 
+                          color: "rgba(60,50,90,0.75)", 
+                          margin: 0, 
+                          lineHeight: 1.5 
                         }}>
-                          {tool.tier}
-                        </span>
+                          {tool.description}
+                        </p>
                       </div>
-
-                      {/* BACK glass panel — calc(100% - 2rem) from template */}
-                      <div
-                        className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] [transform:rotateY(-180deg)] opacity-0 group-hover/card:[transform:rotateY(0deg)] group-hover/card:opacity-100"
-                        style={{
-                          position: "absolute",
-                          width: "calc(100% - 2rem)",
-                          height: "calc(100% - 2rem)",
-                          background: "rgba(255,255,255,0.85)",
-                          backdropFilter: "blur(10px)",
-                          WebkitBackdropFilter: "blur(10px)",
-                          borderRadius: "0.5rem",
-                          border: "1px solid rgba(183, 163, 224, 0.4)",
-                          boxShadow: "0 10px 30px rgba(149,128,196,0.3)",
-                        }}
-                      >
-                        {/* Inner content 80% x 80% of back panel */}
-                        <div style={{
-                          height: "80%",
-                          width: "80%",
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "space-evenly",
-                          gap: "0.5rem",
-                        }}>
-                          <h3 style={{
-                            color: "#5b3fa1",
-                            padding: "0.25rem 0",
-                            margin: 0,
-                            fontWeight: 600,
-                            fontSize: "0.9rem",
-                          }}>
-                            {tool.name}
-                          </h3>
-                          <p style={{
-                            fontSize: "0.75rem",
-                            color: "rgba(60,50,90,0.75)",
-                            margin: 0,
-                            lineHeight: 1.5,
-                          }}>
-                            {tool.description}
-                          </p>
-                        </div>
-                      </div>
-
                     </div>
                   </div>
-                </Link>
-              </motion.div>
-            )
-          })}
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </motion.div>
 
         {filteredTools.length === 0 && (

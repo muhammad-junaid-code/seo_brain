@@ -99,9 +99,9 @@ export default function ToolsPage() {
           </motion.div>
 
           {/* Tools Grid */}
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredTools.map((tool, index) => {
-              // Special image paths
+              // Special image paths for tools page
               const getImagePath = (slug: string) => {
                 if (slug === "llms-txt-generator") return "/images/llm-optimizer.jpg"
                 if (slug === "seo-agent-pro") return "/images/seo-agent-2.jpg"
@@ -116,17 +116,19 @@ export default function ToolsPage() {
                   transition={{ duration: 0.3, delay: index * 0.02 }}
                 >
                   <Link to={`/tools/${tool.slug}`}>
-                    {/* Outer white box */}
-                    <div style={{
-                      padding: "1.5rem",
-                      background: "#ffffff",
-                      borderRadius: "0.75rem",
-                      boxShadow: "0 20px 60px rgba(149, 128, 196, 0.18)",
-                      border: "1px solid rgba(149, 128, 196, 0.12)",
-                      width: "100%",
-                    }}>
-
-                      {/* Card — width:100%, aspectRatio:3/2 so it scales perfectly at ANY size */}
+                    {/* Outer white box — exact from luminous-glass-ui template */}
+                    <div
+                      style={{
+                        padding: "2rem",
+                        background: "#ffffff",
+                        borderRadius: "0.75rem",
+                        boxShadow: "0 20px 60px rgba(149, 128, 196, 0.18)",
+                        border: "1px solid rgba(149, 128, 196, 0.12)",
+                        position: "relative",
+                        zIndex: 2,
+                      }}
+                    >
+                      {/* Card — with background image on tools page */}
                       <div
                         className="group/card"
                         style={{
@@ -154,8 +156,7 @@ export default function ToolsPage() {
                           e.currentTarget.style.boxShadow = "0 25px 60px rgba(80, 60, 130, 0.35), 0 8px 20px rgba(80, 60, 130, 0.2)";
                         }}
                       >
-
-                        {/* FRONT glass panel — always 60% x 60% of card, margin 1rem */}
+                        {/* FRONT glass panel — 60% x 60% with margin 1rem */}
                         <div
                           className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] group-hover/card:[transform:rotateY(180deg)]"
                           style={{
@@ -171,19 +172,21 @@ export default function ToolsPage() {
                             boxShadow: "0 8px 24px rgba(149,128,196,0.25)",
                           }}
                         >
-                          <h3 style={{
-                            color: "rgba(40,30,70,0.95)",
+                          <h3 style={{ 
+                            color: "rgba(40,30,70,0.95)", 
+                            padding: ".25rem 0.5rem", 
+                            margin: 0, 
                             fontWeight: 600,
-                            margin: 0,
                             textAlign: "center",
-                            padding: "0 0.5rem",
-                            fontSize: "0.9rem",
+                            fontSize: "0.875rem",
                             lineHeight: 1.3,
                           }}>
                             {tool.name}
                           </h3>
-                          <span style={{
-                            marginTop: "0.375rem",
+                          <p style={{ 
+                            color: "rgba(80,70,110,0.75)", 
+                            margin: 0,
+                            marginTop: "0.25rem",
                             fontSize: "0.7rem",
                             padding: "2px 10px",
                             borderRadius: "999px",
@@ -193,10 +196,10 @@ export default function ToolsPage() {
                             fontWeight: 500,
                           }}>
                             {tool.tier}
-                          </span>
+                          </p>
                         </div>
 
-                        {/* BACK glass panel — calc(100% - 2rem) from template */}
+                        {/* BACK glass panel — calc(100% - 2rem) */}
                         <div
                           className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] [transform:rotateY(-180deg)] opacity-0 group-hover/card:[transform:rotateY(0deg)] group-hover/card:opacity-100"
                           style={{
@@ -211,35 +214,27 @@ export default function ToolsPage() {
                             boxShadow: "0 10px 30px rgba(149,128,196,0.3)",
                           }}
                         >
-                          {/* Inner content 80% x 80% of back panel */}
-                          <div style={{
-                            height: "80%",
-                            width: "80%",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-evenly",
-                            gap: "0.5rem",
-                          }}>
-                            <h3 style={{
-                              color: "#5b3fa1",
-                              padding: "0.25rem 0",
-                              margin: 0,
+                          {/* Inner content 80% x 80% with justify-evenly */}
+                          <div className="flex flex-col justify-evenly" style={{ height: "80%", width: "80%" }}>
+                            <h3 style={{ 
+                              color: "#5b3fa1", 
+                              padding: "0.5rem 0", 
+                              margin: 0, 
                               fontWeight: 600,
-                              fontSize: "0.9rem",
+                              fontSize: "0.875rem",
                             }}>
                               {tool.name}
                             </h3>
-                            <p style={{
-                              fontSize: "0.75rem",
-                              color: "rgba(60,50,90,0.75)",
-                              margin: 0,
-                              lineHeight: 1.5,
+                            <p style={{ 
+                              fontSize: "0.75rem", 
+                              color: "rgba(60,50,90,0.75)", 
+                              margin: 0, 
+                              lineHeight: 1.5 
                             }}>
                               {tool.description}
                             </p>
                           </div>
                         </div>
-
                       </div>
                     </div>
                   </Link>
