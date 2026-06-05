@@ -168,6 +168,56 @@
   box-shadow: 0 35px 70px rgba(80, 60, 130, 0.45), 0 12px 30px rgba(80, 60, 130, 0.25) !important;
 }
 
+/* Sliding tool name text animation */
+.canvas-frame__copy {
+  position: absolute;
+  top: 50%;
+  left: -100px;
+  transform: translateY(-50%);
+  text-transform: uppercase;
+  z-index: 3;
+  pointer-events: none;
+  color: #5b3fa1;
+  width: 100px;
+  padding-left: 10px;
+}
+
+.canvas-frame__copy .canvas_copy_title {
+  font-size: 14px;
+  display: block;
+  font-weight: 900;
+  color: #2d1a5a;
+  line-height: 1.2;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+}
+
+.canvas-frame__copy .canvas_copy_title:nth-of-type(1) { transition-delay: .1s; }
+.canvas-frame__copy .canvas_copy_title:nth-of-type(2) { transition-delay: .2s; }
+
+.canvas-frame__copy .canvas_copy_details {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-top: 6px;
+  color: #8a78b8;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s;
+  white-space: nowrap;
+}
+
+.canvas-frame:hover .canvas_copy_title,
+.canvas-frame:hover .canvas_copy_details {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 @keyframes draw-line {
   from { stroke-dashoffset: 1200; }
   to { stroke-dashoffset: 0; }

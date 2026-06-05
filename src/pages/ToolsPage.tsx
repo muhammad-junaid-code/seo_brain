@@ -100,7 +100,7 @@ export default function ToolsPage() {
           </motion.div>
 
           {/* Tools Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-16 gap-y-10 pl-8">
             {filteredTools.map((tool, index) => {
               return (
                 <motion.div
@@ -133,6 +133,14 @@ export default function ToolsPage() {
                           height="100%"
                         />
                       </svg>
+                    </div>
+
+                    {/* Sliding tool name text - shows on hover */}
+                    <div className="canvas-frame__copy" aria-hidden="true">
+                      {tool.name.split(' ').slice(0, 2).map((word, i) => (
+                        <strong key={i} className="canvas_copy_title">{word}</strong>
+                      ))}
+                      <span className="canvas_copy_details">{tool.tier} Tool</span>
                     </div>
 
                     {/* White card container */}
