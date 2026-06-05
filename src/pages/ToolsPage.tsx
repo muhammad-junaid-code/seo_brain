@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { tools } from "@/lib/tools-data"
-import { Search, Sparkles, ChevronRight } from "lucide-react"
+import { Search, Sparkles } from "lucide-react"
 
 const categories = [
   { id: "all", label: "All Tools" },
@@ -17,15 +17,6 @@ const categories = [
   { id: "utility", label: "Utility" },
   { id: "agents", label: "Agents" },
 ]
-
-const colorClasses: Record<string, { bg: string; iconBg: string; text: string }> = {
-  image: { bg: "bg-violet-50", iconBg: "bg-violet-100", text: "text-violet-600" },
-  seo: { bg: "bg-blue-50", iconBg: "bg-blue-100", text: "text-blue-600" },
-  writing: { bg: "bg-emerald-50", iconBg: "bg-emerald-100", text: "text-emerald-600" },
-  analytics: { bg: "bg-orange-50", iconBg: "bg-orange-100", text: "text-orange-600" },
-  utility: { bg: "bg-pink-50", iconBg: "bg-pink-100", text: "text-pink-600" },
-  agents: { bg: "bg-slate-50", iconBg: "bg-slate-100", text: "text-slate-600" },
-}
 
 export default function ToolsPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -109,9 +100,8 @@ export default function ToolsPage() {
           </motion.div>
 
           {/* Tools Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredTools.map((tool, index) => {
-              const colors = colorClasses[tool.category] || colorClasses.seo
               return (
                 <motion.div
                   key={tool.slug}
@@ -121,29 +111,55 @@ export default function ToolsPage() {
                 >
                   <Link
                     to={`/tools/${tool.slug}`}
-                    className={`group block cursor-pointer rounded-2xl border border-slate-200 p-5 hover:border-slate-300 hover:shadow-lg transition-all ${colors.bg}`}
+                    className="group/card block cursor-pointer [perspective:1000px]"
                   >
-                    <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
-                      <div className="flex items-start justify-between mb-4">
-                        <div className={`w-12 h-12 rounded-xl ${colors.iconBg} flex items-center justify-center shrink-0`}>
-                          <tool.icon className={`w-6 h-6 ${colors.text}`} />
+                    <div 
+                      className="relative w-full h-[200px] transition-transform duration-500 [transform-style:preserve-3d] group-hover/card:[transform:rotateY(180deg)]"
+                      style={{
+                        boxShadow: "0 25px 60px rgba(80, 60, 130, 0.35)",
+                        borderRadius: "0.5rem",
+                      }}
+                    >
+                      {/* Front Side */}
+                      <div 
+                        className="absolute inset-0 rounded-lg overflow-hidden [backface-visibility:hidden]"
+                        style={{
+                          backgroundImage: `url(/images/${tool.slug}.jpg)`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                      >
+                        {/* Frosted Glass Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="bg-white/55 backdrop-blur-md rounded-lg px-4 py-3 mx-4 text-center shadow-lg">
+                            <h3 className="font-bold text-slate-900 text-sm mb-1">{tool.name}</h3>
+                            <Badge 
+                              variant="outline" 
+                              className={tool.tier === "Free" 
+                                ? "bg-emerald-50/80 text-emerald-700 border-emerald-200 text-xs" 
+                                : "bg-violet-50/80 text-violet-700 border-violet-200 text-xs"
+                              }
+                            >
+                              {tool.tier}
+                            </Badge>
+                          </div>
                         </div>
+                      </div>
+
+                      {/* Back Side */}
+                      <div 
+                        className="absolute inset-0 rounded-lg overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)] bg-white/85 backdrop-blur-md flex flex-col items-center justify-center p-4 text-center"
+                      >
+                        <h3 className="font-bold text-[#5b3fa1] text-base mb-2">{tool.name}</h3>
+                        <p className="text-sm text-slate-600 line-clamp-3 mb-3">{tool.description}</p>
                         <Badge 
                           variant="outline" 
-                          className={tool.tier === "Free" 
-                            ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
-                            : "bg-violet-50 text-violet-700 border-violet-200"
-                          }
+                          className="bg-slate-100 text-slate-600 border-slate-200 text-xs capitalize"
                         >
-                          {tool.tier}
+                          {tool.category}
                         </Badge>
                       </div>
-                      <h3 className="font-semibold text-slate-900 mb-1 group-hover:text-violet-600 transition-colors flex items-center gap-1">
-                        {tool.name}
-                        <ChevronRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                      </h3>
-                      <p className="text-sm text-slate-600 line-clamp-2">{tool.description}</p>
-                    </motion.div>
+                    </div>
                   </Link>
                 </motion.div>
               )
