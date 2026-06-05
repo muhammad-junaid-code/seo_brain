@@ -4,7 +4,6 @@ import { useState, useRef } from "react"
 import { Link } from "react-router-dom"
 import { motion, useInView } from "framer-motion"
 import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
 import { 
   Search, 
   ImageIcon, 
@@ -617,159 +616,155 @@ export function ToolsSection() {
         {/* Tools Grid */}
         <motion.div 
           ref={ref}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {filteredTools.map((tool) => (
-            <motion.div
-              key={tool.id}
-              variants={cardVariants}
-            >
-              <Link
-                to={`/tools/${tool.slug}`}
-                className="canvas-frame group block"
+          {filteredTools.map((tool) => {
+            // Special image paths
+            const getImagePath = (slug: string) => {
+              if (slug === "llms-txt-generator") return "/images/llm-optimizer.jpg"
+              if (slug === "seo-agent-pro") return "/images/seo-agent-2.jpg"
+              return `/images/${slug}.jpg`
+            }
+            
+            return (
+              <motion.div
+                key={tool.id}
+                variants={cardVariants}
               >
-                {/* Purple animated border line */}
-                <div className="canvas-frame__border" aria-hidden="true">
-                  <svg preserveAspectRatio="none">
-                    <defs>
-                      <linearGradient id={`grad-purple-home-${tool.slug}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#b8a4e0" />
-                        <stop offset="100%" stopColor="#5b3fa1" />
-                      </linearGradient>
-                    </defs>
-                    <rect
-                      className="rect-gradient"
-                      fill="none"
-                      stroke={`url(#grad-purple-home-${tool.slug})`}
-                      strokeLinecap="square"
-                      strokeWidth="3"
-                      strokeMiterlimit="30"
-                      width="100%"
-                      height="100%"
-                    />
-                  </svg>
-                </div>
-
-                {/* Sliding tool name text - shows on hover */}
-                <div className="canvas-frame__copy" aria-hidden="true">
-                  {tool.name.split(' ').slice(0, 2).map((word, i) => (
-                    <strong key={i} className="canvas_copy_title">{word}</strong>
-                  ))}
-                  <span className="canvas_copy_details">{tool.tier} Tool</span>
-                </div>
-
-                {/* White card container */}
-                <div
-                  className="glass-card-container"
-                  style={{
-                    padding: "1rem",
+                <Link to={`/tools/${tool.slug}`}>
+                  {/* Outer white box */}
+                  <div style={{
+                    padding: "1.5rem",
                     background: "#ffffff",
-                    borderRadius: "0.5rem",
-                    boxShadow: "0 15px 40px rgba(149, 128, 196, 0.15)",
-                    border: "1px solid rgba(149, 128, 196, 0.1)",
-                    position: "relative",
-                    zIndex: 2,
-                  }}
-                >
-                  {/* Image card with blur and glassmorphism overlay */}
-                  <div
-                    className="group/card glass-card"
-                    style={{
-                      position: "relative",
-                      width: "100%",
-                      height: "140px",
-                      backgroundImage: `url(/images/ai-image-generator.jpg)`,
-                      backgroundPosition: "center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      borderRadius: "0.375rem",
-                      boxShadow: "0 15px 40px rgba(80, 60, 130, 0.25), 0 5px 15px rgba(80, 60, 130, 0.15)",
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {/* Blur overlay on image */}
-                    <div 
-                      className="absolute inset-0"
-                      style={{
-                        backdropFilter: "blur(3px)",
-                        WebkitBackdropFilter: "blur(3px)",
-                        background: "rgba(255,255,255,0.15)",
-                      }}
-                    />
-                    
-                    {/* Front overlay - name and tier */}
-                    <div
-                      className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] group-hover/card:[transform:rotateY(180deg)]"
-                      style={{
-                        position: "absolute",
-                        width: "65%",
-                        minHeight: "45%",
-                        background: "rgba(255,255,255,0.55)",
-                        backdropFilter: "blur(8px)",
-                        WebkitBackdropFilter: "blur(8px)",
-                        borderRadius: "0.375rem",
-                        border: "1px solid rgba(255,255,255,0.6)",
-                        boxShadow: "0 6px 18px rgba(149,128,196,0.2)",
-                        padding: "0.5rem",
-                        zIndex: 2,
-                      }}
-                    >
-                      <h3 className="text-xs font-semibold text-center" style={{ color: "rgba(40,30,70,0.95)" }}>
-                        {tool.name}
-                      </h3>
-                      <Badge 
-                        variant="outline" 
-                        className={`mt-1 ${tool.tier === "Free" 
-                          ? "bg-emerald-50/80 text-emerald-700 border-emerald-200 text-[10px]" 
-                          : "bg-violet-50/80 text-violet-700 border-violet-200 text-[10px]"
-                        }`}
-                      >
-                        {tool.tier}
-                      </Badge>
-                    </div>
+                    borderRadius: "0.75rem",
+                    boxShadow: "0 20px 60px rgba(149, 128, 196, 0.18)",
+                    border: "1px solid rgba(149, 128, 196, 0.12)",
+                    width: "100%",
+                  }}>
 
-                    {/* Back overlay - description */}
+                    {/* Card — width:100%, aspectRatio:3/2 so it scales perfectly at ANY size */}
                     <div
-                      className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] [transform:rotateY(-180deg)] opacity-0 group-hover/card:[transform:rotateY(0deg)] group-hover/card:opacity-100"
+                      className="group/card"
                       style={{
-                        position: "absolute",
-                        width: "calc(100% - 0.75rem)",
-                        height: "calc(100% - 0.75rem)",
-                        background: "rgba(255,255,255,0.85)",
-                        backdropFilter: "blur(10px)",
-                        WebkitBackdropFilter: "blur(10px)",
-                        borderRadius: "0.375rem",
-                        border: "1px solid rgba(183, 163, 224, 0.4)",
-                        boxShadow: "0 8px 20px rgba(149,128,196,0.25)",
-                        padding: "0.5rem",
-                        zIndex: 2,
+                        position: "relative",
+                        width: "100%",
+                        aspectRatio: "3/2",
+                        backgroundImage: `url(${getImagePath(tool.slug)})`,
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        borderRadius: "0.5rem",
+                        boxShadow: "0 25px 60px rgba(80, 60, 130, 0.35), 0 8px 20px rgba(80, 60, 130, 0.2)",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        transition: "transform 0.4s ease, box-shadow 0.4s ease",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-6px)";
+                        e.currentTarget.style.boxShadow = "0 35px 70px rgba(80, 60, 130, 0.45), 0 12px 30px rgba(80, 60, 130, 0.25)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "0 25px 60px rgba(80, 60, 130, 0.35), 0 8px 20px rgba(80, 60, 130, 0.2)";
                       }}
                     >
-                      <h3 className="text-xs font-semibold mb-1" style={{ color: "#5b3fa1" }}>
-                        {tool.name}
-                      </h3>
-                      <p className="text-[10px] text-center line-clamp-2" style={{ color: "rgba(60,50,90,0.75)", lineHeight: 1.4 }}>
-                        {tool.description}
-                      </p>
-                      <Badge 
-                        variant="outline" 
-                        className="mt-1 bg-slate-100/80 text-slate-600 border-slate-200 text-[10px] capitalize"
+
+                      {/* FRONT glass panel — always 60% x 60% of card, margin 1rem */}
+                      <div
+                        className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] group-hover/card:[transform:rotateY(180deg)]"
+                        style={{
+                          position: "absolute",
+                          width: "60%",
+                          height: "60%",
+                          background: "rgba(255,255,255,0.55)",
+                          backdropFilter: "blur(8px)",
+                          WebkitBackdropFilter: "blur(8px)",
+                          margin: "1rem",
+                          borderRadius: "0.5rem",
+                          border: "1px solid rgba(255,255,255,0.6)",
+                          boxShadow: "0 8px 24px rgba(149,128,196,0.25)",
+                        }}
                       >
-                        {tool.category}
-                      </Badge>
+                        <h3 style={{
+                          color: "rgba(40,30,70,0.95)",
+                          fontWeight: 600,
+                          margin: 0,
+                          textAlign: "center",
+                          padding: "0 0.5rem",
+                          fontSize: "0.9rem",
+                          lineHeight: 1.3,
+                        }}>
+                          {tool.name}
+                        </h3>
+                        <span style={{
+                          marginTop: "0.375rem",
+                          fontSize: "0.7rem",
+                          padding: "2px 10px",
+                          borderRadius: "999px",
+                          background: tool.tier === "Free" ? "rgba(16,185,129,0.15)" : "rgba(91,63,161,0.15)",
+                          color: tool.tier === "Free" ? "#059669" : "#5b3fa1",
+                          border: tool.tier === "Free" ? "1px solid rgba(16,185,129,0.3)" : "1px solid rgba(91,63,161,0.3)",
+                          fontWeight: 500,
+                        }}>
+                          {tool.tier}
+                        </span>
+                      </div>
+
+                      {/* BACK glass panel — calc(100% - 2rem) from template */}
+                      <div
+                        className="flex flex-col items-center justify-center transition-all duration-700 ease-out [backface-visibility:hidden] [transform:rotateY(-180deg)] opacity-0 group-hover/card:[transform:rotateY(0deg)] group-hover/card:opacity-100"
+                        style={{
+                          position: "absolute",
+                          width: "calc(100% - 2rem)",
+                          height: "calc(100% - 2rem)",
+                          background: "rgba(255,255,255,0.85)",
+                          backdropFilter: "blur(10px)",
+                          WebkitBackdropFilter: "blur(10px)",
+                          borderRadius: "0.5rem",
+                          border: "1px solid rgba(183, 163, 224, 0.4)",
+                          boxShadow: "0 10px 30px rgba(149,128,196,0.3)",
+                        }}
+                      >
+                        {/* Inner content 80% x 80% of back panel */}
+                        <div style={{
+                          height: "80%",
+                          width: "80%",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-evenly",
+                          gap: "0.5rem",
+                        }}>
+                          <h3 style={{
+                            color: "#5b3fa1",
+                            padding: "0.25rem 0",
+                            margin: 0,
+                            fontWeight: 600,
+                            fontSize: "0.9rem",
+                          }}>
+                            {tool.name}
+                          </h3>
+                          <p style={{
+                            fontSize: "0.75rem",
+                            color: "rgba(60,50,90,0.75)",
+                            margin: 0,
+                            lineHeight: 1.5,
+                          }}>
+                            {tool.description}
+                          </p>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                </Link>
+              </motion.div>
+            )
+          })}
         </motion.div>
 
         {filteredTools.length === 0 && (
