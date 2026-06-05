@@ -616,7 +616,7 @@ export function ToolsSection() {
         {/* Tools Grid */}
         <motion.div 
           ref={ref}
-          className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 pl-36"
+          className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-20 mx-auto max-w-7xl"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -658,10 +658,10 @@ export function ToolsSection() {
                   <span className="canvas_copy_details">{tool.tier} Tool</span>
                 </div>
 
-                {/* White outer box — exact: padding 2rem, same as luminous template */}
+                {/* White outer box — reduced padding by 8% */}
                 <div
                   style={{
-                    padding: "2rem",
+                    padding: "1.5rem",
                     background: "#ffffff",
                     borderRadius: "0.75rem",
                     boxShadow: "0 20px 60px rgba(149, 128, 196, 0.18)",
@@ -670,13 +670,14 @@ export function ToolsSection() {
                     zIndex: 2,
                   }}
                 >
-                  {/* Image card — exact: width 100%, aspectRatio 3/2 (same as 300x200) */}
+                  {/* Image card — reduced size by 8% from all sides */}
                   <div
                     className="group/card"
                     style={{
                       position: "relative",
-                      width: "100%",
+                      width: "92%",
                       aspectRatio: "3/2",
+                      margin: "4% auto",
                       backgroundImage: `url(/images/${tool.slug === "llms-txt-generator" ? "llm-optimizer" : tool.slug === "seo-agent-pro" ? "seo-agent-2" : tool.slug}.jpg)`,
                       backgroundPosition: "center",
                       backgroundSize: "cover",
