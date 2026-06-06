@@ -208,25 +208,3 @@
   from { stroke-dashoffset: 0; }
   to   { stroke-dashoffset: 2400; }
 }
-
-@media (max-width: 1023px) {
-  .canvas-frame__copy {
-    left: 0;
-    top: auto;
-    bottom: -60px;
-    transform: none;
-    width: 100%;
-    padding-left: 8px;
-  }
-  .canvas_copy_title {
-    font-size: 20px;
-  }
-  .canvas_copy_details {
-    font-size: 9px;
-    margin-top: 4px;
-  }
-  .canvas-frame__border {
-    left: 0;
-    top: 0;
-  }
-}
