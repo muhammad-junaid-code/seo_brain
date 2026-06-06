@@ -208,3 +208,42 @@
   from { stroke-dashoffset: 0; }
   to   { stroke-dashoffset: 2400; }
 }
+
+/* ===== MOBILE ONLY: reposition/resize the luminous card decorations =====
+   Keeps the animated border + sliding copy visible (never hidden), but pulls
+   the offsets inward and shrinks the type so nothing spills outside the card. */
+@media (max-width: 640px) {
+  .canvas-frame {
+    display: block;
+  }
+  /* Pull the animated purple border in so it stays within the card bounds */
+  .canvas-frame__border {
+    top: 10px;
+    left: -10px;
+  }
+  /* Keep the sliding tool name inside the card boundary */
+  .canvas-frame__copy {
+    left: 10px;
+    top: 14%;
+    transform: translateY(0);
+    width: auto;
+    max-width: 55%;
+    padding-left: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .canvas-frame__copy.copy-bottom {
+    top: 14%;
+    bottom: auto;
+    transform: translateY(0);
+  }
+  .canvas_copy_title {
+    font-size: 18px;
+    line-height: 1.05;
+  }
+  .canvas_copy_details {
+    font-size: 8px;
+    margin-top: 4px;
+  }
+}

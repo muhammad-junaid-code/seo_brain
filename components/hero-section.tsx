@@ -191,7 +191,7 @@ export function HeroSection() {
 
           {/* Stats */}
           <motion.div 
-            className="mt-12 flex items-center justify-center gap-8 sm:gap-12 text-center"
+            className="mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-12 text-center overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}

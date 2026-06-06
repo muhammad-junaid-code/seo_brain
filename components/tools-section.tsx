@@ -616,7 +616,7 @@ export function ToolsSection() {
         {/* Tools Grid */}
         <motion.div 
           ref={ref}
-          className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-20 mx-auto max-w-7xl"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2 sm:gap-12 sm:px-20 mx-auto max-w-7xl"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
