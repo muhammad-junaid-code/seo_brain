@@ -221,10 +221,11 @@
     top: 10px;
     left: -10px;
   }
-  /* Keep the sliding tool name inside the card boundary */
+  /* Keep the sliding tool name inside the card boundary, anchored to bottom */
   .canvas-frame__copy {
     left: 10px;
-    top: 14%;
+    top: auto;
+    bottom: 14%;
     transform: translateY(0);
     width: auto;
     max-width: 55%;
@@ -234,8 +235,8 @@
     word-break: break-word;
   }
   .canvas-frame__copy.copy-bottom {
-    top: 14%;
-    bottom: auto;
+    top: auto;
+    bottom: 14%;
     transform: translateY(0);
   }
   .canvas_copy_title {
