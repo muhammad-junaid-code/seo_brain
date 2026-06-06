@@ -100,7 +100,7 @@ export default function ToolsPage() {
           </motion.div>
 
           {/* Tools Grid */}
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-20 mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 lg:pl-36">
             {filteredTools.map((tool, index) => {
               return (
                 <motion.div
@@ -143,8 +143,8 @@ export default function ToolsPage() {
 
                     {/* White outer box — increased height */}
                     <div
+                      className="p-4 lg:p-8"
                       style={{
-                        padding: "1.5rem 1rem",
                         background: "#ffffff",
                         borderRadius: "0.75rem",
                         boxShadow: "0 20px 60px rgba(149, 128, 196, 0.18)",

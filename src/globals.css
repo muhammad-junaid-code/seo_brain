@@ -208,3 +208,16 @@
   from { stroke-dashoffset: 0; }
   to   { stroke-dashoffset: 2400; }
 }
+
+@media (max-width: 1024px) {
+  .canvas-frame__copy {
+    display: none;
+  }
+  .canvas-frame__border {
+    display: none;
+  }
+  .canvas-frame {
+    display: block;
+    width: 100%;
+  }
+}
