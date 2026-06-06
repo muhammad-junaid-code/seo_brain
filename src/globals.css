@@ -239,11 +239,22 @@
     transform: translateY(0);
   }
   .canvas_copy_title {
-    font-size: 18px;
+    font-size: 15px;
     line-height: 1.05;
   }
   .canvas_copy_details {
+    font-size: 7px;
+    margin-top: 3px;
+  }
+}
+
+/* Shrink the outside sliding copy on tablet widths (641px–1023px) */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .canvas_copy_title {
+    font-size: 16px;
+    line-height: 1.1;
+  }
+  .canvas_copy_details {
     font-size: 8px;
-    margin-top: 4px;
   }
 }

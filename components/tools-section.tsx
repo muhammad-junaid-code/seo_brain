@@ -720,13 +720,13 @@ export function ToolsSection() {
                         padding: ".2rem 0.4rem",
                         margin: 0,
                         fontWeight: 600,
-                        fontSize: "0.75rem",
+                        fontSize: "clamp(0.55rem, 2.2vw, 0.75rem)",
                         textAlign: "center",
                         lineHeight: 1.3,
                       }}>
                         {tool.name}
                       </h3>
-                      <p style={{ color: "rgba(80,70,110,0.75)", margin: 0, fontSize: "0.6rem" }}>
+                      <p style={{ color: "rgba(80,70,110,0.75)", margin: 0, fontSize: "clamp(0.45rem, 1.8vw, 0.6rem)", textAlign: "center" }}>
                         {tool.tier} Tool
                       </p>
                     </div>
@@ -748,10 +748,10 @@ export function ToolsSection() {
                     >
                       {/* Inner content — exact: height 80%, width 80% */}
                       <div className="flex flex-col justify-evenly" style={{ height: "80%", width: "80%" }}>
-                        <h3 style={{ color: "#5b3fa1", padding: "0.5rem 0", margin: 0, fontWeight: 600, fontSize: "0.875rem" }}>
+                        <h3 style={{ color: "#5b3fa1", padding: "0.5rem 0", margin: 0, fontWeight: 600, fontSize: "clamp(0.6rem, 2.4vw, 0.875rem)", textAlign: "center" }}>
                           {tool.name}
                         </h3>
-                        <p style={{ fontSize: "0.75rem", color: "rgba(60,50,90,0.75)", margin: 0, lineHeight: 1.5 }}>
+                        <p style={{ fontSize: "clamp(0.5rem, 2vw, 0.75rem)", color: "rgba(60,50,90,0.75)", margin: 0, lineHeight: 1.5, textAlign: "center" }}>
                           {tool.description}
                         </p>
                       </div>
