@@ -191,27 +191,27 @@ export function HeroSection() {
 
           {/* Stats */}
           <motion.div 
-            className="mt-12 flex items-center justify-center gap-8 sm:gap-12 text-center"
+            className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-slate-900">
+              <div className="text-2xl sm:text-4xl font-bold text-slate-900">
                 <AnimatedCounter value={50} suffix="K+" />
               </div>
               <div className="text-sm text-slate-500">Active Users</div>
             </div>
             <div className="w-px h-10 bg-slate-200" />
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-slate-900">
+              <div className="text-2xl sm:text-4xl font-bold text-slate-900">
                 <AnimatedCounter value={2} suffix="M+" />
               </div>
               <div className="text-sm text-slate-500">Pages Optimized</div>
             </div>
             <div className="w-px h-10 bg-slate-200" />
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-slate-900">
+              <div className="text-2xl sm:text-4xl font-bold text-slate-900">
                 <AnimatedCounter value={99} suffix=".9%" />
               </div>
               <div className="text-sm text-slate-500">Uptime</div>

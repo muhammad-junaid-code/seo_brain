@@ -616,7 +616,7 @@ export function ToolsSection() {
         {/* Tools Grid */}
         <motion.div 
           ref={ref}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 lg:pl-36"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 lg:pl-36 mt-16"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -660,7 +660,7 @@ export function ToolsSection() {
 
                 {/* White outer box — increased height */}
                 <div
-                  className="p-4 lg:p-8"
+                  className="p-3 sm:p-4 lg:p-8"
                   style={{
                     background: "#ffffff",
                     borderRadius: "0.75rem",
