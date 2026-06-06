@@ -225,7 +225,7 @@
   .canvas-frame__copy {
     left: 10px;
     top: auto;
-    bottom: 14%;
+    bottom: 4%;
     transform: translateY(0);
     width: auto;
     max-width: 55%;
@@ -236,7 +236,7 @@
   }
   .canvas-frame__copy.copy-bottom {
     top: auto;
-    bottom: 14%;
+    bottom: 4%;
     transform: translateY(0);
   }
   .canvas_copy_title {
